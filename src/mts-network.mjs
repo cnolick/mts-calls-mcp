@@ -11,7 +11,7 @@ let tlsPromise;
 let callsCaPromise;
 async function callsTls() {
   // dialer.mts.ru presents an MTS private CA chain. Trust the public root
-  // shipped in the original app, in addition to Node's system roots.
+  // shipped in the original app, in addition to Node's bundled roots.
   // This trust applies only to this fixed host; hostname checks stay enabled.
   if (!callsCaPromise) callsCaPromise = readFile(resolve(root, 'certs/mts-class2-root-g2.crt'), 'utf8');
   return { ca: [...rootCertificates, await callsCaPromise] };

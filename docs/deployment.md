@@ -92,7 +92,8 @@ sudo systemctl restart mts-calls-mcp
 Secrets and transcript bodies are not written to the service log. Tool results
 can be stored by OpenClaw in its private session history.
 
-Refresh happens on requests, including after an idle period. An expired or
+The HTTP service checks expiry every five minutes, refreshing when due even
+without tool calls. Requests also check expiry. An expired or
 revoked upstream session may require a new personal login. The current
 client-channel certificate expires in May 2027; updating it requires obtaining
 the new credential from your own application setup. Keep private backups of
