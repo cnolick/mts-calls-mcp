@@ -1,0 +1,37 @@
+{
+  "name": "mts-transcripts-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server for My MTS call transcripts with automatic session refresh",
+  "scripts": {
+    "rea": "node scripts/rea.mjs",
+    "rea:doctor": "rea doctor --client codex --skill --json --filter-output healthy,scope_checks",
+    "rea:mcp-check": "node scripts/rea.mjs mcp doctor --json",
+    "android:pull": "python3 scripts/pull_apk.py",
+    "session:import": "node scripts/import-session.mjs",
+    "auth:start": "node scripts/mts-auth.mjs start",
+    "auth:finish": "node scripts/mts-auth.mjs finish",
+    "mcp:check-phone": "node scripts/check-phone-mcp.mjs",
+    "mcp:check-api": "node scripts/check-api-mcp.mjs",
+    "session:native": "node scripts/native-session.mjs",
+    "start": "node src/mcp.mjs",
+    "test": "node --test",
+    "start:http": "node src/http.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/node": "2.1.1",
+    "@modelcontextprotocol/server": "2.3.1",
+    "fast-xml-parser": "5.11.2",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.3.1",
+    "frida-java-bridge": "7.0.13",
+    "rea-agents": "6.4.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}

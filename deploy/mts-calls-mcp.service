@@ -1,0 +1,34 @@
+[Unit]
+Description=My MTS call transcripts MCP
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=mts-calls
+Group=mts-calls
+WorkingDirectory=/opt/mts-calls-mcp
+ExecStart=/usr/bin/node /opt/mts-calls-mcp/src/http.mjs
+Environment=MTS_SESSION_FILE=/var/lib/mts-calls-mcp/mts-session.json
+Environment=MTS_CLIENT_PFX_FILE=/var/lib/mts-calls-mcp/production-modern.pfx
+Environment=MTS_CLIENT_PFX_PASSWORD_FILE=/var/lib/mts-calls-mcp/production-modern.passphrase
+Environment=MTS_MCP_TOKEN_FILE=/var/lib/mts-calls-mcp/mcp-token
+Environment=MTS_MCP_PORT=28981
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=15
+UMask=0077
+StateDirectory=mts-calls-mcp
+StateDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/mts-calls-mcp
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target
